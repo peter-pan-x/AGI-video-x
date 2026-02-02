@@ -10,8 +10,8 @@ if not exist node_modules (
     call npm install
 )
 
-echo [INFO] Starting development server...
-echo [INFO] The player will open in your default browser automatically.
+echo [INFO] 正在启动开发服务器 (Vite)...
+echo [INFO] 播放器将在默认浏览器中自动开启，请稍候。
 echo.
 call npm run dev
 

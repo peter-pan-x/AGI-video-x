@@ -99,6 +99,13 @@ const App: React.FC = () => {
     }
   };
 
+  // 自动清理内存 (Memory GC)
+  useEffect(() => {
+    return () => {
+      if (videoSrc) URL.revokeObjectURL(videoSrc);
+    };
+  }, [videoSrc]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!videoSrc) return;
@@ -133,7 +140,7 @@ const App: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [videoSrc, isPlaying]);
+  }, [videoSrc]); // 移除 isPlaying 依赖，避免状态改变导致监听器频繁重装
 
   useEffect(() => {
     if (videoRef.current) {
@@ -150,10 +157,29 @@ const App: React.FC = () => {
     setHideControlsTimer(timer);
   };
 
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    if (file && file.type.startsWith('video/')) {
+      if (videoSrc) URL.revokeObjectURL(videoSrc);
+      const url = URL.createObjectURL(file);
+      setVideoSrc(url);
+      triggerToast('文件已加载');
+    } else if (file) {
+      triggerToast('请拖入有效的视频文件');
+    }
+  };
+
   return (
     <div
       className={`player-container ${showControls ? 'show-controls' : ''}`}
       onMouseMove={handleMouseMove}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
     >
       {!videoSrc ? (
         <div className="empty-state">
@@ -164,6 +190,7 @@ const App: React.FC = () => {
             选择视频文件
             <input type="file" accept="video/*" hidden onChange={handleFileChange} />
           </label>
+          <div className="author-name" style={{ marginTop: '1rem', color: '#666' }}>或 将文件拖拽至此处</div>
           <div className="author-name">开发者：AGI彼得潘</div>
         </div>
       ) : (
