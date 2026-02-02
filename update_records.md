@@ -36,6 +36,7 @@
 - **Phase 1**: 基于 Vite+React 搭建 Web 版核心逻辑。
 - **Phase 2**: 添加全键盘映射与 UI 动效优化，写入开发者署名：AGI彼得潘。
 - **Phase 3**: 迁移至 Electron 环境，设计专用 App 图标，完成 Windows 平台打包适配。
+- **Phase 4 (Optimization & Polish)**: 实现无边框沉浸式 UI、拖拽播放、音量滚轮交互及内存回收优化，完成 GitHub 开源推送。
 
 ---
-*记录生成于: Antigravity (Model: Gemini 2.0 Flash Agentic)*
+*记录更新于: 2026-02-02 (Antigravity)*
