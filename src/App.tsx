@@ -174,12 +174,24 @@ const App: React.FC = () => {
     }
   };
 
+  const handleWheel = (e: React.WheelEvent) => {
+    if (!videoSrc) return;
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    setVolume(prev => {
+      const next = Math.max(0, Math.min(1, prev + delta));
+      triggerToast(`音量: ${Math.round(next * 100)}%`);
+      return next;
+    });
+  };
+
   return (
     <div
       className={`player-container ${showControls ? 'show-controls' : ''}`}
       onMouseMove={handleMouseMove}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
+      onWheel={handleWheel}
     >
       {!videoSrc ? (
         <div className="empty-state">
