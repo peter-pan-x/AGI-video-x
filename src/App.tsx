@@ -193,6 +193,18 @@ const App: React.FC = () => {
       onDrop={handleDrop}
       onWheel={handleWheel}
     >
+      <div className="title-bar">
+        <div className="title-bar-info">
+          <FileVideo size={14} />
+          <span>AGI PLAYER</span>
+        </div>
+        <div className="title-bar-controls">
+          <button className="window-ctrl min"></button>
+          <button className="window-ctrl max"></button>
+          <button className="window-ctrl close"></button>
+        </div>
+      </div>
+
       {!videoSrc ? (
         <div className="empty-state">
           <FileVideo size={80} color="#a0a0a0" strokeWidth={1} />

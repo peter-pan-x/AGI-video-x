@@ -7,13 +7,13 @@ function createWindow() {
         width: 1200,
         height: 800,
         backgroundColor: '#0c0c0c',
+        frame: false, // 开启无边框沉浸模式
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
         },
-        // 隐藏菜单栏
         autoHideMenuBar: true,
-        title: "Video Player"
+        title: "AGI Player"
     });
 
     const startUrl = isDev

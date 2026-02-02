@@ -2,7 +2,7 @@
   --bg-color: #0c0c0c;
   --panel-color: #1a1a1a;
   --accent-color: #e50914;
-  /* Standard deep red for contrast, or blue? Let's go with a sleek silver/white for accent */
+  --titlebar-height: 32px;
   --text-active: #ffffff;
   --text-muted: #a0a0a0;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -228,4 +228,53 @@ video {
 
 .toast.show {
   opacity: 1;
+}/* Custom Title Bar */
+.title-bar {
+  height: var(--titlebar-height);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--glass-border);
 }
+
+.title-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.title-bar-controls {
+  display: flex;
+  gap: 12px;
+  -webkit-app-region: no-drag;
+}
+
+.window-ctrl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.window-ctrl:hover {
+  opacity: 1;
+}
+
+.window-ctrl.close { background-color: #ff5f56; }
+.window-ctrl.min { background-color: #ffbd2e; }
+.window-ctrl.max { background-color: #27c93f; }
